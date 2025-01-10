@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Daily Div Switcher</title>
+      <style>
+         body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+         }
+
+         .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+         .content {
+            width: 200px;
+            height: 200px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 24px;
+            border-radius: 10px;
+            margin: 10px 0;
+         }
+
+         #div1 {
+            background-color: #4caf50; /* Green */
+         }
+
+         #div2 {
+            background-color: #2196f3; /* Blue */
+         }
+
+         .active {
+            display: flex;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="container">
+         Ko je dezuran danas?
+         <div id="div1" class="content">Djulian</div>
+         <div id="div2" class="content">Vladan</div>
+      </div>
+
+      <script>
+         // Function to calculate the day of the year (1-based)
+         function getDayOfYear() {
+            const start = new Date(new Date().getFullYear(), 0, 0);
+            const diff = new Date() - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            return Math.floor(diff / oneDay);
+         }
+
+         // Get the current day of the year (1 to 365 or 366)
+         const currentDayOfYear = getDayOfYear();
+         console.log(currentDayOfYear);
+         // Logic to switch between divs
+         function switchDivs() {
+            const div1 = document.getElementById("div1");
+            const div2 = document.getElementById("div2");
+
+            // If it's an odd day of the year, show Div 1, else show Div 2
+            if (currentDayOfYear % 2 !== 0) {
+               div1.classList.add("active");
+               div2.classList.remove("active");
+            } else {
+               div1.classList.remove("active");
+               div2.classList.add("active");
+            }
+         }
+
+         // Call the switchDivs function
+         switchDivs();
+      </script>
+   </body>
+</html>
